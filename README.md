@@ -1,5 +1,5 @@
 # res_ht_gwas
-Code for the project: Genome-Wide Association Study of Apparent Treatment-Resistant Hypertension
+**Code for the project: Genome-Wide Association Study of Apparent Treatment-Resistant Hypertension**
 
 We conducted a genome-wide association analysis for 39737 cases of apparent treatment resistant hypertension and  15996 individuals with mild hypertension. Top varints were replicate at UK Biobank. aTRH-risk loci were characterised using pathway enrichment, a transcriptome-wide association study (TWAS), and Mendelian randomization (MR).
 
