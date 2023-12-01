@@ -1,0 +1,336 @@
+---
+title: "Resistant hypertension: Create phenotype file"
+author: "Anni Kauko"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This script creates cretes phenotype file for resistant hypertension from ukbb data.
+
+**Phenotype definitions**
+
+All individuals must have diagnosed hypertension. 
+We will create three alternative endpoint defintions for cases based on blood pressure
+and the number of hypertensive medication classes.
+
+* resht_fg, FinnGen styled definiton 
+  -  Number of medication classes $\geq$ 4
+  - Hypertension diagnoses
+* resht_ukb, official definition
+  -  Number of medication classes $\geq$ 3
+  -  Systolic BP  $\geq$ 140 or diastolic BP  $\geq$ 90
+  - Hypertension diagnoses
+* resht_both
+  -  Either resht_fg or resht_ukb true
+  - Hypertension diagnoses
+
+Control:
+
+  - Hypertension diagnoses
+  - One class of hypertensive medication.
+
+**Required variables**
+
+ * 4080, Systolic blood pressure, automated reading (Blood pressure)
+ * 4079, Diastolic blood pressure, automated reading (Blood pressure)
+ * 6150, Vascular/heart problems diagnosed by doctor (Medical conditions)
+ * 20003 Treatment/medication code (Medications)  
+
+**Covariates**
+
+ * 21003, Age when attended assessment centre (Baseline characteristics)
+ * 22001, Sex (Genotypes)
+ * 22009, Genetic principal components (Genotypes)
+
+**Filtering**
+
+ * 31, Sex (Baseline characteristics)
+ * 22006, Ethnicity (Genotypes)
+ * 22019, Sex chromosome aneuploidy (Genotypes)
+ * 22021, Genetic kinship
+
+# Set up
+
+
+**Libraries**
+
+```{r, message = FALSE, warnings = FALSE}
+#Matti styled definition:
+packages <- c("data.table", "dplyr", "tidyr", "stringr")
+
+is.installed <- function(pkg) {
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  sapply(pkg, require, character.only = TRUE)
+}
+is.installed(packages)
+
+```
+
+
+**Install newest version dxpy and old version of pandas**
+
+```{r}
+
+#system("export PATH=/home/rstudio-server/.local/bin:$PATH") 
+system("pip3 install -I --upgrade pandas==1.3.5")
+system('pip3 install -I dxpy')
+
+```
+
+**Assign variables**
+
+```{r}
+
+# Assign project-id of dataset
+pid <- 'project-GZ62xgQJFFQXbyFk1ZFJkFz0'
+# Assign dataset record-id
+rid <- 'record-GZ6ZB8QJp084QbyGq1fjXFBV'
+# Assign joint dataset project-id:record-id
+dataset = paste(pid, rid, sep = ":")
+
+#Variables, "i0" means first instance, i.e. the main study
+variables_in <-c("eid","p31", "p21003_i0", paste0("p4080_i0_a",0:1),  paste0("p4079_i0_a",0:1), "p6150_i0", 
+                 "p20003_i0", "p22001", "p22006", "p22019", "p22021", paste0("p22009_a",1:10)) 
+
+med_class_in    <- "ATC-codes_ukbb.csv"
+
+my_rmd_base     <- "create_ukbb_pheno_resht"
+raw_columns_out <- "resht_pheno0.csv"
+test_pheno_out  <- "resht_pheno_test.tsv"
+final_pheno_out <- "resht_pheno.tsv"
+```
+
+
+# Extract and read in data
+
+**Extract medication data**
+
+```{r}
+
+#Read in medication classes
+system(str_glue("dx download data/{med_class_in}"))
+
+#Read in medication classes and fix data formats
+med_class <- fread(med_class_in) %>%
+  select(ukbb20003_nr, nr_med, Class1, Class2, Class3) %>%
+  rename(p20003=ukbb20003_nr) %>%
+  mutate_at("p20003", as.character) %>%
+  mutate_at(vars(contains('Class')), ~if_else(.=="", NA_character_, as.character(.))) %>%
+  mutate_at(vars(contains('Class')), as.factor) %>%
+  filter(!is.na(p20003))
+
+summary(med_class)
+
+```
+
+**Extract and write out raw column data**, if it does not exist. 
+
+```{r}
+
+##Check data format
+#cmd <- str_glue('dx extract_dataset {dataset} -ddd')
+#system(cmd)
+#data_dict_file <- system("ls *.data_dictionary.csv", intern=TRUE)
+#data_dict_df <- fread(data_dict_file)
+
+#Extract raw column data and write out
+fields <- paste(paste0("participant.", variables_in), collapse=",")
+cmd <- str_glue("dx extract_dataset {dataset} --fields '{fields}' -o {raw_columns_out} --delim '\t' ")
+system(cmd)
+system(str_glue('dx upload {raw_columns_out} --path data/{raw_columns_out}'))
+
+
+```
+
+**Read in raw column data and preprocess.**
+
+```{r}
+
+class_var <- c("p31", "p6150", "p20003","p22001", "p22006", "p22019")
+df <- fread(raw_columns_out) %>% 
+        rename_all(~str_remove(.x,"participant.")) %>%
+        rename_all(~str_remove(.x,"_i0")) %>%
+        mutate_at(class_var, as.factor) %>% 
+        mutate_at("eid", as.character)
+
+df %>% summary()
+```
+
+
+# Create custom phenotype
+
+## Preprocess and filter
+
+**Calculate means for blood pressure**
+
+```{r}
+ #Take mean of blood pressure - one measurement is sufficient for the value
+df <-  df %>%      
+        rowwise %>% 
+          mutate(p4080 = mean(c(p4080_a0, p4080_a1), na.rm=T),
+                 p4079 = mean(c(p4079_a0, p4079_a1), na.rm=T)) %>%
+        ungroup() %>%
+        mutate_at(c("p4080","p4079"), ~if_else(is.nan(.), NA_real_, .))
+```
+
+**Calculate hypertension medication class count at the base line and add to data frame**
+
+```{r}
+class.count <- df %>% 
+  select(eid, p20003) %>%
+  #reformat medications 
+  mutate(p20003 = str_remove_all(p20003, "[\\[\\]]")) %>%   #reformat
+  mutate(p20003 = str_split(p20003, ",")) %>%               #to vector 
+  unnest(p20003) %>%                                        #vector to long format
+  #join medication classes and to long format by class
+  left_join(med_class, by='p20003') %>%
+  pivot_longer(starts_with("Class"), names_to="tmp", values_to="Class") %>%
+  #group and calculate class count
+  group_by(eid) %>%
+  summarise(nrclass = length(unique(na.omit(Class))))
+
+df <- df %>% left_join(class.count, by="eid")
+
+summary(df)
+```
+
+**Filter data**
+
+All individuals
+```{r}
+df <- df 
+dim(df)[1]
+```
+
+Individuals without diagnosed hypertension
+
+```{r}
+df.ht <- df %>% filter(p6150 == "[4]")
+dim(df.ht)[1]
+```
+Remove individuals with missing blood pressure values
+
+```{r}
+df.ht <- df.ht %>% 
+  drop_na(p4080, p4079)
+dim(df.ht)[1]
+```
+
+Remove individuals with missing covariate values
+
+```{r}
+df.ht <- df.ht %>% 
+  drop_na(p21003, p22001, p22009_a1)
+dim(df.ht)[1]
+```
+Remove individual if does not have European ancestry
+
+```{r}
+df.ht <- df.ht %>% filter(p22006 == 1)
+dim(df.ht)[1]
+```
+Remove individual if Sex and Gender differ.
+
+```{r}
+df.ht <- df.ht %>% filter(p31 == p22001)
+dim(df.ht)[1]
+```
+
+Remove individual if sex chromosome aneuploidy
+
+```{r}
+df.ht <- df.ht %>% filter(is.na(p22019))
+dim(df.ht)[1]
+```
+
+Remove individual with excess relatedness (ten or more third-degree relatives)
+
+```{r}
+df.ht <- df.ht %>% filter(p22021 == 0 | p22021 == 1)
+dim(df.ht)[1]
+```
+
+
+
+## Create varable resistant hypertension
+
+**Create class count and add it to data frame**
+
+
+```{r}
+
+df.ht <- df.ht %>%       
+  mutate(resht_fg = case_when(
+    nrclass >= 4 ~ 1L,
+    nrclass == 1 ~ 0L)) %>%
+  mutate(resht_ukb = case_when(
+    nrclass >= 3 & (p4080 >= 140 | p4079 >= 90) ~ 1L,
+    nrclass == 1 ~ 0L)) %>%
+  mutate(resht_both = case_when(
+    resht_fg == 1 | resht_ukb ==1 ~ 1L,
+    nrclass == 1 ~ 0L)) %>%
+  mutate_at(vars(contains("resht")), as.factor)
+   
+```
+
+**Reformat**
+
+```{r}
+df.ht <- df.ht %>%
+  rename(FID = eid) %>%
+  mutate(IID = FID) %>%
+  select(FID, IID, resht_fg, resht_ukb, resht_both, p4080, p4079, nrclass, p21003, p22001, contains("p22009"))
+
+summary(df.ht)    
+  
+```
+
+
+<details><summary>**Create a test data set**</summary>
+
+```{r}
+df.test <- df.ht %>% sample_n(500)
+df.test %>% summary()
+```
+
+</details>
+
+
+# Write out
+
+
+Test set
+
+```{r}
+fwrite(df.test, test_pheno_out, sep="\t", na="NA", quote=F)
+system(str_glue('dx upload {test_pheno_out} --path data/{test_pheno_out}'))
+```
+
+
+Final data and the script
+
+```{r}
+fwrite(df.ht, final_pheno_out, sep="\t", na="NA", quote=F)
+system(str_glue('dx upload {final_pheno_out} --path data/{final_pheno_out}'))
+system(str_glue('dx upload {my_rmd_base}.Rmd'))
+```
+
+Create html and transfer it
+
+```{r}
+#system(rmarkdown::render(str_glue("{my_rmd_base}.Rmd")))
+system(str_glue('dx upload {my_rmd_base}.html'))
+```
+
+
+
