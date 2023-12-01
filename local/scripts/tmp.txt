@@ -1,0 +1,22 @@
+Requirements
+
+scripts/functions.R
+{data_path}/ATC_codes_r12.csv
+scripts/gen_res_r12.R 
+scripts/fg_pheno_short.txt
+scripts/rsdify.py
+scripts/vegas2/run_vegas2.bash
+scripts/twas/preprocess_for_twas.bash
+bash script/twas/run_twas.bash RES_HT
+
+data_path/finngen_R12_HT.txt.gz
+data_path/nrmed_max_r12.tsv.gz
+fg_path/phenotype_1.0/data/finngen_R12_minimum_1.0.txt.gz
+data_path/gwas_covs_r12.txt.gz
+
+data/regenie_r12/
+data/vegas2/
+
+data/twas
+
+scripts/twas/get_qlt.bash file_names2.txt
