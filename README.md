@@ -26,11 +26,25 @@ We conducted a genome-wide association analysis for 39737 cases of apparent trea
 
 ```
 ht_prs_preg
-├── README.md                 	# Overview
-├── res_ht_gwas3.rmd            # R markdown for the analysis
-├── res_ht_gwas3.html            # html generated from the R markdown
+├── README.md		# Overview
+├── res_ht_gwas3.rmd 	# R markdown for the analysis
+├── res_ht_gwas3.html	# html generated from the R markdown
 ├── scripts
-	├── blaa		                   #
+	├── functions.R	 	# Minor R functions, required by res_ht_gwas3.rmd
+	├── gen_res_r12.R	# Creates medication use variables, required by res_ht_gwas3.rmd
+	├── fg_pheno_short.txt	# List of used phenotype variables, required by res_ht_gwas3.rmd
+	├── rsdify.py 		# Adds rsid:s to FinnGen styled GWAS summaries, provied by FinnGen
+	├── README_rsdify.MD 	# Readme for rsdify.MD
+	├── vegas2 		# Direct for vegas2 scripts
+		├── run_vegas2.bash	# Runs vegas
+		├── vegas2v2.pl		# Vegas script (I have added possibility to give directory paths)
+		├── generate_GOs.R	# Legacy script for creating own pathway definitons, not used.
+	├── twas 		# Directory for twas scripts
+		├── run_vegas2.bash	# Runs vegas
+		├── vegas2v2.pl		# Vegas script (I have added possibility to give directory paths)
+		├── generate_GOs.R	# Legacy script for creating own pathway definitons, not used.
+	
+
 ├── regenie_input_resht12
 	├── blaa		                   #
 ├── data
