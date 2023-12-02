@@ -33,15 +33,15 @@ ht_prs_preg
     ├── functions.R                       # Minor R functions, required by res_ht_gwas3.rmd
     ├── gen_res_r12.R                     # Creates medication use variables, required by res_ht_gwas3.rmd
     ├── fg_pheno_short.txt                # List of used phenotype variables, required by res_ht_gwas3.rmd
-    ├── rsdify.py 		                  # Adds rsid:s to FinnGen styled GWAS summaries, provied by FinnGen
-    ├── README_rsdify.MD 	              # Readme for rsdify.MD
-    ├── vegas2 		                      # Direct for vegas2 scripts
+    ├── rsdify.py 		          # Adds rsid:s to FinnGen styled GWAS summaries, provied by FinnGen
+    ├── README_rsdify.MD 	          # Readme for rsdify.MD
+    ├── vegas2 		                  # Directory for vegas2 scripts
         ├── run_vegas2.bash                   # Runs vegas
         ├── vegas2v2.pl                       # Vegas script: Modified to enable use of directory paths
         ├── generate_GOs.R                    # Legacy script for creating own pathway definitons, not used. SIIRRÄ!
     ├── twas                              # Directory for twas scripts
         ├── run_twas.bash                     # Runs twas for given set tissues - parallelized by chromosome
-        ├── pos_file_names.txt 		          # Position file names - specifies tissues of interest, required by run_twas.bash		
+        ├── pos_file_names.txt 		      # Position file names - specifies tissues of interest, required by run_twas.bash		
         ├── preprocess_for_twas.bash          # Preprocesses files for twas
         ├── unpack_all_targz.bash             # Required by preprocess_for_twas.bash
 ├── regenie_input_resht12                 # Regenie and finemap input (this directory in FinnGen includes also input data)
@@ -59,9 +59,9 @@ ht_prs_preg
     ├── ATC-codes_r8_eng_all.csv*             # ATC codes present in R8, also problematic codes included; probably old codes
     ├── ATC-codes_final_r8.csv*               # ATC codes present in R8, only codes from current Fimea classification included
     ├── ATC-codes_r12.csv*                    # ATC codes present in R12, only codes from current Fimea classification included
-    ├── <endpoint>_r12.csv*		              # OR table for susie hits
+    ├── <endpoint>_r12.csv*                   # OR table for susie hits
     ├── regenie_r12												
-        ├── <endpoint>_rsn.gz				  # Output of regenie pipeline with rsid and n columns added
+        ├── <endpoint>_rsn.gz                 # Output of regenie pipeline with rsid and n columns added
         ├── <endpoint>_pval_manhattan.png     # Output of regenie pipeline, manhattan plot
         ├── <endpoint>_pval_manhattan_loglog.png   
         ├── <endpoint>_pval_qqplot.png        # Output of regenie pipeline, qqplot plot
