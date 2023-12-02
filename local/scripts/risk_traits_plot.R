@@ -9,13 +9,13 @@ library(tidyverse)
 library(TwoSampleMR)
 
 #We need top hits from our own data - we use variants replicated in ukb and reformat
-fread("data/regenie_ukbb/replic_ukb_combined.csv") %>%
+fread("data/replic/replic_ukb_combined.csv") %>%
   select(rsid) %>%
-  left_join(fread("data/gwas_rs_r12/RES_HT_summary.txt"), by="rsid") %>%
+  left_join(fread("data/regenie_r12/RES_HT_summary.txt"), by="rsid") %>%
   rename(SNP=rsid, beta=beta, se=sebeta, pval=pval, eaf=af_alt, effect_allele=alt, other_allele=ref) %>%
-  fwrite("data/gwas_rs_r12/resht_risktrait_input.csv", sep="\t")
+  fwrite("data/regenie_r12/resht_risktrait_input.csv", sep="\t")
 
-ht_res <- read_exposure_data("data/gwas_rs_r12/resht_risktrait_input.csv", sep="\t")
+ht_res <- read_exposure_data("data/regenie_r12/resht_risktrait_input.csv", sep="\t")
 
 
 #Available GWAS's
@@ -64,7 +64,7 @@ trait.list.h <- lapply(trait.list, function(trait){
 #Preprocess data for the plot
 
 #rsid-gene names
-rsid_gene <- fread("data/regenie_ukbb/replic_ukb_combined.csv") %>%
+rsid_gene <- fread("data/replic/replic_ukb_combined.csv") %>%
   select(SNP=rsid, GENE=gene_most_severe)
 
 #To table

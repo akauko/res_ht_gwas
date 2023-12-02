@@ -1,0 +1,10 @@
+GTExv8.ALL.Adipose_Subcutaneous.tar.gz
+GTExv8.ALL.Adipose_Visceral_Omentum.tar.gz
+GTExv8.ALL.Adrenal_Gland.tar.gz
+GTExv8.ALL.Artery_Aorta.tar.gz
+GTExv8.ALL.Artery_Coronary.tar.gz
+GTExv8.ALL.Artery_Tibial.tar.gz
+GTExv8.EUR.Heart_Atrial_Appendage.tar.gz
+GTExv8.EUR.Heart_Left_Ventricle.tar.gz
+GTExv8.EUR.Kidney_Cortex.tar.gz
+GTExv8.EUR.Liver.tar.gz
