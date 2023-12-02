@@ -118,5 +118,5 @@ ht_prs_preg
         ├── resht_risk_r12.jpg            # Risk plot, RES_HT
         ├── resht_risk_r12.pdf    
         ├── manhattan_resht_r12.jpg          # Manhattan with manually added SNP names
-        ├── manhattan_resht_r12.afdesign     # Manhattan with manually added SNP names
+        ├── manhattan_resht_r12.afdesign 
 ```
