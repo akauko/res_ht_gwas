@@ -1,4 +1,5 @@
 # res_ht_gwas
+
 **Code for the project: Genome-Wide Association Study of Apparent Treatment-Resistant Hypertension**
 
 We conducted a genome-wide association analysis for 39737 cases of apparent treatment resistant hypertension and  15996 individuals with mild hypertension. Top varints were replicate at UK Biobank. aTRH-risk loci were characterised using pathway enrichment, a transcriptome-wide association study (TWAS), and Mendelian randomization (MR).
@@ -33,15 +34,14 @@ ht_prs_preg
     ├── functions.R                       # Minor R functions, required by res_ht_gwas3.rmd
     ├── gen_res_r12.R                     # Creates medication use variables, required by res_ht_gwas3.rmd
     ├── fg_pheno_short.txt                # List of used phenotype variables, required by res_ht_gwas3.rmd
-    ├── rsdify.py 		          # Adds rsid:s to FinnGen styled GWAS summaries, provied by FinnGen
-    ├── README_rsdify.MD 	          # Readme for rsdify.MD
-    ├── vegas2 		                  # Directory for vegas2 scripts
-        ├── run_vegas2.bash                   # Runs vegas
+    ├── rsdify.py                         # Adds rsid:s to FinnGen styled GWAS summaries, provied by FinnGen
+    ├── README_rsdify.MD                  # Readme for rsdify.MD
+    ├── vegas2                                # Direct for vegas2 scripts
+        ├── run_vegas2.bash                   # Vegas wrapper
         ├── vegas2v2.pl                       # Vegas script: Modified to enable use of directory paths
-        ├── generate_GOs.R                    # Legacy script for creating own pathway definitons, not used. SIIRRÄ!
     ├── twas                              # Directory for twas scripts
         ├── run_twas.bash                     # Runs twas for given set tissues - parallelized by chromosome
-        ├── pos_file_names.txt 		      # Position file names - specifies tissues of interest, required by run_twas.bash		
+        ├── pos_file_names.txt                # Position file names - specifies tissues of interest, required by run_twas.bash        
         ├── preprocess_for_twas.bash          # Preprocesses files for twas
         ├── unpack_all_targz.bash             # Required by preprocess_for_twas.bash
 ├── regenie_input_resht12                 # Regenie and finemap input (this directory in FinnGen includes also input data)
@@ -59,32 +59,64 @@ ht_prs_preg
     ├── ATC-codes_r8_eng_all.csv*             # ATC codes present in R8, also problematic codes included; probably old codes
     ├── ATC-codes_final_r8.csv*               # ATC codes present in R8, only codes from current Fimea classification included
     ├── ATC-codes_r12.csv*                    # ATC codes present in R12, only codes from current Fimea classification included
-    ├── <endpoint>_r12.csv*                   # OR table for susie hits
-    ├── regenie_r12												
-        ├── <endpoint>_rsn.gz                 # Output of regenie pipeline with rsid and n columns added
+    ├── <endpoint>_r12.csv*                   # OR table for susie hits, calculated from SUSIE summaries and HYPTENS regenie results
+    ├── regenie_r12                                                
         ├── <endpoint>_pval_manhattan.png     # Output of regenie pipeline, manhattan plot
         ├── <endpoint>_pval_manhattan_loglog.png   
         ├── <endpoint>_pval_qqplot.png        # Output of regenie pipeline, qqplot plot
         ├── <endpoint>_summary.txt            # Output of regenie pipeline, top hits
         ├── <endpoint>.SUSIE.cred.summary.tsv # Output of finemapping pipeline, SUSIE summary
     ├── vegas2
-        ├── RES_HT_genebased_summary.txt
-        ├── RES_HT_pathway_summary.txt
-        ├── HYPTENS_genebased_summary.txt
-        ├── HYPTENS_pathway_summary.txt
+        ├── RES_HT_genebased_summary.txt      # Results summary for gene based run, RES_HT
+        ├── RES_HT_pathway_summary.txt        # Results summary for pathway based run, RES_HT
+        ├── HYPTENS_genebased_summary.txt     # Results summary for gene based run, HYPTENS
+        ├── HYPTENS_pathway_summary.txt       # Results summary for pathway based run, HYPTENS
     ├── twas
-        ├── resulsts_r12
-            ├── RES_HT.twas.summary2.tsv		
-            ├── resht_twas_r12.jpg
-            ├── resht_twas_r12.pdf
-  
-			
-
-
-├── ukbb                         #
-	├── blaa
-├── local
-   ├── blaa		
-
+        ├── hgnc_gene_names.txt               # Gene name mapping  
+        ├── resulsts_r12                      
+            ├── RES_HT.twas.summary2.tsv      # Summary table for twas run, gene names mapped to results  
+            ├── resht_twas_r12.jpg            # Plot for twas results
+            ├── resht_twas_r12.pdf            # Plot for twas results
+├── ukbb                          # Scripts and resuts from UKBB RAP 
+    ├── create_ukbb_pheno_resht.Rmd   # 1. Create phenotypes for ukbb
+    ├── create_ukbb_pheno_resht.html  
+    ├── run_liftover.ipynb            # 2. Liftover chip data from GCRh37 to GCRh38, run at ttyd app at UKB RAP
+    ├── run_regenie_resht.ipynb       # 3. Run regenie. Includes pre and post processing 					
+	    ├── scripts
+	        ├── draw_manhattan.R          # Required by run_regenie_resht.ipynb	
+	    ├── liftover_plink_beds       # Input for liftover pipeline 
+            ├── liftover_plink_beds.wdl   # liftover wdl script, provided by UKBB		
+            ├── liftover_input.json       # liftover parameters
+            ├── b37ToHg38.over.chain      # chain file
+        ├── data
+            ├── ATC-codes_ukbb.csv        # ATC codes used in analysis 
+            ├── regenie                   # UKBB regenie results 
+                ├── manhattan.resht_<variable>.png
+                ├── qqplot.resht_<variable>.png		    
+├── local                        
+   ├── scripts                        # Miscellanous scripts run locally - check file paths
+        ├── run_MR_r12.R                  # Run mendelian randomization for RES_HT and HYPTENS
+        ├── risk_traits_plot.R            # Create risk traits plot for RES_HT replicated hits
+        ├── check_signif_snip.R           # Check P valus and betas at UKBB data for SUSIE hits	
+        ├── filter_ukbb_by_FinnGen_P.R    # Prefiltering step for check_signif_snip.R
+        ├── check_ukbb_atc.R              # Checks semimanually created ATC list agains UKBB codes
+        ├── get_qtl.bash                  # Fetches eQTL from gtex for TWAS run
+        ├── file_names2.txt               # List of eQTL file names for TWAS run    #FETCH FULL VERSION FROM FINNGEN
+	    ├── generate_GOs.R                # Legacy script for creating own pathway definitons for Vegas2, not used!
+   ├── data
+ 	   ├── atc_all_matches_c0.csv		  # C0* codes from https://github.com/PhilAppleby/ukbb-srmed/blob/master/data/atc_all_matches.csv  
+       ├── ukbb20003_n.csv				  # Counts for drug codes https://biobank.ndph.ox.ac.uk/ukb/field.cgi?id=20003
+	   ├── ATC-codes_ukbb.csv			  # Semimanually created based on above lists
+   	   ├── replic
+   	        ├── replic_<variabe>_all.csv      # Replication summary
+			├── replic_ukb_combined.csv       # Manually  created: Replicated variants from variables ukbvar and fgvar
+   ├── figs
+	    ├── resht_mr_r12.jpg              # Mendelian randomization plot, RES_HT
+	    ├── resht_mr_r12.pdf
+	    ├── hyptens_mr_r12.jpg            # Mendelian randomization plot, HYPTENS
+	    ├── hyptens_mr_r12.pdf
+	    ├── resht_risk_r12.jpg            # Risk plot, RES_HT
+	    ├── resht_risk_r12.pdf	
+	    ├── manhattan_resht_r12.jpg		  # Manhattan with manually added SNP names
+	    ├── manhattan_resht_r12.afdesign		
 ```
-
