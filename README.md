@@ -94,7 +94,7 @@ ht_prs_preg
                   ├── manhattan.resht_<variable>.png
                   ├── qqplot.resht_<variable>.png            
   ├── local
-      ├── scripts                        # Miscellanous scripts run locally - check file paths
+      ├── scripts                        # Miscellanous scripts run locally 
           ├── run_MR_r12.R                  # Run mendelian randomization for RES_HT and HYPTENS
           ├── risk_traits_plot.R            # Create risk traits plot for RES_HT replicated hits
           ├── check_signif_snip.R           # Check P valus and betas at UKBB data for SUSIE hits    
