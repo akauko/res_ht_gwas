@@ -81,42 +81,42 @@ ht_prs_preg
     ├── create_ukbb_pheno_resht.Rmd   # 1. Create phenotypes for ukbb
     ├── create_ukbb_pheno_resht.html  
     ├── run_liftover.ipynb            # 2. Liftover chip data from GCRh37 to GCRh38, run at ttyd app at UKB RAP
-    ├── run_regenie_resht.ipynb       # 3. Run regenie. Includes pre and post processing 					
-	    ├── scripts
-	        ├── draw_manhattan.R          # Required by run_regenie_resht.ipynb	
-	    ├── liftover_plink_beds       # Input for liftover pipeline 
-            ├── liftover_plink_beds.wdl   # liftover wdl script, provided by UKBB		
+    ├── run_regenie_resht.ipynb       # 3. Run regenie. Includes pre and post processing                     
+        ├── scripts
+            ├── draw_manhattan.R          # Required by run_regenie_resht.ipynb    
+        ├── liftover_plink_beds       # Input for liftover pipeline 
+            ├── liftover_plink_beds.wdl   # liftover wdl script, provided by UKBB        
             ├── liftover_input.json       # liftover parameters
             ├── b37ToHg38.over.chain      # chain file
         ├── data
             ├── ATC-codes_ukbb.csv        # ATC codes used in analysis 
             ├── regenie                   # UKBB regenie results 
                 ├── manhattan.resht_<variable>.png
-                ├── qqplot.resht_<variable>.png		    
+                ├── qqplot.resht_<variable>.png            
 ├── local                        
    ├── scripts                        # Miscellanous scripts run locally - check file paths
         ├── run_MR_r12.R                  # Run mendelian randomization for RES_HT and HYPTENS
         ├── risk_traits_plot.R            # Create risk traits plot for RES_HT replicated hits
-        ├── check_signif_snip.R           # Check P valus and betas at UKBB data for SUSIE hits	
+        ├── check_signif_snip.R           # Check P valus and betas at UKBB data for SUSIE hits    
         ├── filter_ukbb_by_FinnGen_P.R    # Prefiltering step for check_signif_snip.R
         ├── check_ukbb_atc.R              # Checks semimanually created ATC list agains UKBB codes
         ├── get_qtl.bash                  # Fetches eQTL from gtex for TWAS run
         ├── file_names2.txt               # List of eQTL file names for TWAS run    #FETCH FULL VERSION FROM FINNGEN
-	    ├── generate_GOs.R                # Legacy script for creating own pathway definitons for Vegas2, not used!
+        ├── generate_GOs.R                # Legacy script for creating own pathway definitons for Vegas2, not used!
    ├── data
- 	   ├── atc_all_matches_c0.csv		  # C0* codes from https://github.com/PhilAppleby/ukbb-srmed/blob/master/data/atc_all_matches.csv  
-       ├── ukbb20003_n.csv				  # Counts for drug codes https://biobank.ndph.ox.ac.uk/ukb/field.cgi?id=20003
-	   ├── ATC-codes_ukbb.csv			  # Semimanually created based on above lists
-   	   ├── replic
-   	        ├── replic_<variabe>_all.csv      # Replication summary
-			├── replic_ukb_combined.csv       # Manually  created: Replicated variants from variables ukbvar and fgvar
+        ├── atc_all_matches_c0.csv         # C0* codes from https://github.com/PhilAppleby/ukbb-srmed/blob/master/data/atc_all_matches.csv  
+       ├── ukbb20003_n.csv                 # Counts for drug codes https://biobank.ndph.ox.ac.uk/ukb/field.cgi?id=20003
+       ├── ATC-codes_ukbb.csv              # Semimanually created based on above lists
+          ├── replic
+               ├── replic_<variabe>_all.csv   # Replication summary
+            ├── replic_ukb_combined.csv       # Manually  created: Replicated variants from variables ukbvar and fgvar
    ├── figs
-	    ├── resht_mr_r12.jpg              # Mendelian randomization plot, RES_HT
-	    ├── resht_mr_r12.pdf
-	    ├── hyptens_mr_r12.jpg            # Mendelian randomization plot, HYPTENS
-	    ├── hyptens_mr_r12.pdf
-	    ├── resht_risk_r12.jpg            # Risk plot, RES_HT
-	    ├── resht_risk_r12.pdf	
-	    ├── manhattan_resht_r12.jpg		  # Manhattan with manually added SNP names
-	    ├── manhattan_resht_r12.afdesign		
+        ├── resht_mr_r12.jpg              # Mendelian randomization plot, RES_HT
+        ├── resht_mr_r12.pdf
+        ├── hyptens_mr_r12.jpg            # Mendelian randomization plot, HYPTENS
+        ├── hyptens_mr_r12.pdf
+        ├── resht_risk_r12.jpg            # Risk plot, RES_HT
+        ├── resht_risk_r12.pdf    
+        ├── manhattan_resht_r12.jpg          # Manhattan with manually added SNP names
+        ├── manhattan_resht_r12.afdesign     # Manhattan with manually added SNP names
 ```
