@@ -108,8 +108,8 @@ ht_prs_preg
           ├── ukbb20003_n.csv                # Counts for drug codes https://biobank.ndph.ox.ac.uk/ukb/field.cgi?id=20003
           ├── ATC-codes_ukbb.csv             # Semimanually created based on above lists
           ├── replic
-          ├── replic_<variabe>_all.csv       # Replication summary
-          ├── replic_ukb_combined.csv        # Manually  created: Replicated variants from variables ukbvar and fgvar
+              ├── replic_<variabe>_all.csv       # Replication summary
+              ├── replic_ukb_combined.csv        # Manually  created: Replicated variants from variables ukbvar and fgvar
       ├── figs
           ├── resht_mr_r12.jpg                # Mendelian randomization plot, RES_HT
           ├── resht_mr_r12.pdf
