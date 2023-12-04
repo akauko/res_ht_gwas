@@ -66,11 +66,11 @@ ht_prs_preg
           ├── <endpoint>_pval_qqplot.png        # Output of regenie pipeline, qqplot plot  
           ├── <endpoint>_summary.txt            # Output of regenie pipeline, top hits
           ├── <endpoint>.SUSIE.cred.summary.tsv # Output of finemapping pipeline, SUSIE summary
-      ├── vegas2
-          ├── RES_HT_genebased_summary.txt      # Results summary for gene based run, RES_HT
-          ├── RES_HT_pathway_summary.txt        # Results summary for pathway based run, RES_HT
-          ├── HYPTENS_genebased_summary.txt     # Results summary for gene based run, HYPTENS
-          ├── HYPTENS_pathway_summary.txt       # Results summary for pathway based run, HYPTENS
+      ├── vegas2                            # vegas2 results for RES_HT and HYPTENS
+          ├── <endpoint>_genebased.out          # Results for a gene based run
+          ├── <endpoint>_genebased_summary.txt  # Significant results for a gene based run
+          ├── <endpoint>_pathway.out            # Results for a pathway based run
+          ├── <endpoint>_pathway_summary.txt    # Significant results for a pathway based run
       ├── twas
           ├── hgnc_gene_names.txt               # Gene name mapping  
           ├── resulsts_r12                      
