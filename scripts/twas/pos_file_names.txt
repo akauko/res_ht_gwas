@@ -1,0 +1,10 @@
+GTExv8.EUR.Adipose_Subcutaneous.pos
+GTExv8.EUR.Adipose_Visceral_Omentum.pos
+GTExv8.EUR.Adrenal_Gland.pos
+GTExv8.EUR.Artery_Aorta.pos
+GTExv8.EUR.Artery_Coronary.pos
+GTExv8.EUR.Artery_Tibial.pos
+GTExv8.EUR.Heart_Atrial_Appendage.pos
+GTExv8.EUR.Heart_Left_Ventricle.pos
+GTExv8.EUR.Kidney_Cortex.pos
+GTExv8.EUR.Liver.pos
