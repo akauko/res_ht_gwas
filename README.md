@@ -101,7 +101,7 @@ ht_prs_preg
           ├── filter_ukbb_by_FinnGen_P.R    # Prefiltering step for check_signif_snip.R
           ├── check_ukbb_atc.R              # Checks semimanually created ATC list agains UKBB codes
           ├── get_qtl.bash                  # Fetches eQTL from gtex for TWAS run
-          ├── file_names2.txt               # List of eQTL file names for TWAS run    #FETCH FULL VERSION FROM FINNGEN
+          ├── file_names.txt               # List of eQTL file names for TWAS run    
           ├── generate_GOs.R                # Legacy script for creating own pathway definitons for Vegas2, not used!
       ├── data
           ├── atc_all_matches_c0.csv         # C0* codes from https://github.com/PhilAppleby/ukbb-srmed/blob/master/data/atc_all_matches.csv
