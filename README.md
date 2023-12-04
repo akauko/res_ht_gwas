@@ -81,18 +81,18 @@ ht_prs_preg
       ├── create_ukbb_pheno_resht.Rmd   # 1. Create phenotypes for ukbb
       ├── create_ukbb_pheno_resht.html  
       ├── run_liftover.ipynb            # 2. Liftover chip data from GCRh37 to GCRh38, run at ttyd app at UKB RAP
-      ├── run_regenie_resht.ipynb       # 3. Run regenie. Includes pre and post processing                     
-          ├── scripts
-              ├── draw_manhattan.R          # Required by run_regenie_resht.ipynb    
-          ├── liftover_plink_beds       # Input for liftover pipeline 
-              ├── liftover_plink_beds.wdl   # liftover wdl script, provided by UKBB        
-              ├── liftover_input.json       # liftover parameters
-              ├── b37ToHg38.over.chain      # chain file
-          ├── data
-              ├── ATC-codes_ukbb.csv        # ATC codes used in analysis 
-              ├── regenie                   # UKBB regenie results 
-                  ├── manhattan.resht_<variable>.png
-                  ├── qqplot.resht_<variable>.png            
+      ├── run_regenie_resht.ipynb       # 3. Run regenie. Includes pre and post processing
+      ├── scripts
+          ├── draw_manhattan.R          # Required by run_regenie_resht.ipynb
+      ├── liftover_plink_beds       # Input for liftover pipeline
+          ├── liftover_plink_beds.wdl   # liftover wdl script, provided by UKBB
+          ├── liftover_input.json       # liftover parameters
+          ├── b37ToHg38.over.chain      # chain file
+      ├── data
+          ├── ATC-codes_ukbb.csv        # ATC codes used in analysis 
+          ├── regenie                   # UKBB regenie results
+              ├── manhattan.resht_<variable>.png
+              ├── qqplot.resht_<variable>.png            
   ├── local
       ├── scripts                        # Miscellanous scripts run locally 
           ├── run_MR_r12.R                  # Run mendelian randomization for RES_HT and HYPTENS
