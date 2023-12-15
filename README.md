@@ -34,7 +34,7 @@ ht_prs_preg
       ├── functions.R                       # Minor R functions, required by res_ht_gwas3.rmd
       ├── gen_res_r12.R                     # Creates medication use variables, required by res_ht_gwas3.rmd
       ├── fg_pheno_short.txt                # List of used phenotype variables, required by res_ht_gwas3.rmd
-      ├── rsdify.py                         # Adds rsid:s to FinnGen styled GWAS summaries, provied by FinnGen
+      ├── rsdify.py                         # https://github.com/FINNGEN/commons/tree/master/annotate_rsids: Adds rsid:s to FinnGen styled GWAS summaries
       ├── README_rsdify.MD                  # Readme for rsdify.MD
       ├── vegas2                                # Direct for vegas2 scripts
           ├── run_vegas2.bash                   # Vegas wrapper
