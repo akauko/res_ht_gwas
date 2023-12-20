@@ -1256,3 +1256,12 @@ Figure was uploaded:
 <p float="left">
   <img src="figs/resht_risk_r12.jpg" />
 </p>
+
+
+# Session info
+
+<details><summary>**sessionInfo**</summary>
+```{r}
+sessionInfo()
+```
+</details>
