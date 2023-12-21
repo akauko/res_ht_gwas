@@ -24,6 +24,10 @@ We conducted a genome-wide association analysis apparent treatment resistant hyp
 * TWAS/FUSION: http://gusevlab.org/projects/fusion/
 * TwoSampleMR: https://mrcieu.github.io/TwoSampleMR/index.html
 
+**FinnGen pipelines**
+* Regenie: https://github.com/FINNGEN/regenie-pipelines
+* Finemapping: https://github.com/FINNGEN/finemapping-pipeline
+  
 **Files**
 
 Files have been collected from FinnGen, UKBB research analysis platform and local computer. In FinnGen directory name is ~/res_ht and it includes also earlier survival analysis. In UKKB project is called 'resistant_hypertension'.
