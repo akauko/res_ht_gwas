@@ -1,2 +1,3 @@
 *.html linguist-vendored
+*.pl linguist-vendored  #This is bit silly, but one copied script biases too much
 *.Rmd linguist-detectable=true
