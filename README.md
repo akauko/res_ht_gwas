@@ -30,7 +30,7 @@ We conducted a genome-wide association analysis apparent treatment resistant hyp
   
 **Files**
 
-Files have been collected from FinnGen, UKBB research analysis platform and local computer. In FinnGen directory name is ~/res_ht and it includes also earlier survival analysis. In UKKB project is called 'resistant_hypertension'.
+Files have been collected from FinnGen, UKBB research analysis platform and local computer. In FinnGen directory name is ~/res_ht and it includes also earlier survival analysis. The UKBB project is called 'resistant_hypertension'.
 
 ```
 ht_prs_preg
