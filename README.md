@@ -6,7 +6,7 @@ We conducted a genome-wide association analysis apparent treatment resistant hyp
 
 **FinnGen**
 
-* Data: FinnGen https://www.finngen.fi/en
+* FinnGen: https://www.finngen.fi/en
 * Description of variables: https://risteys.finngen.fi/
 * Finngen Data Specifics: https://finngen.gitbook.io/finngen-handbook/finngen-data-specifics
 * Data access: https://site.fingenious.fi/en/
