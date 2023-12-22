@@ -1,0 +1,19 @@
+Risk trait;ID;sample_size;nsnp;year;author
+Triglycerides;ieu-b-111;441016;12321875;2020;Richardson, Tom
+Body mass index;ukb-b-2303;454884;9851867;2018;Ben Elsworth
+Fasting glucose;ebi-a-GCST90002232;200622;31008728;2021;Chen J
+Urate;ukb-d-30880_irnt;361194;13585994;2018;Neale lab
+Waist circumference;ukb-b-9405;462166;9851867;2018;Ben Elsworth
+eGFR;ieu-b-4832;76511;7892788;2022;Howe LJ
+Neuroticism score;ukb-b-4630;374323;9851867;2018;Ben Elsworth
+HDL cholesterol;ieu-b-109;403943;12321875;2020;Richardson, Tom
+Height;ukb-b-10787;461950;9851867;2018;Ben Elsworth
+Total cholesterol;met-d-Total_C;115078;12321875;2020;Borges CM
+Current tobacco smoking;ukb-b-223;462434;9851867;2018;Ben Elsworth
+LDL cholesterol;ieu-b-110;440546;12321875;2020;Richardson, Tom
+Alcoholic drinks per week;ieu-b-73;335394;11887865;2019;Liu, M
+Glycated hemoglobin levels;ebi-a-GCST90002244;146806;30649064;2021;Chen J
+C-reactive protein;ukb-d-30710_irnt;361194;13586004;2018;Neale lab
+UACR*; -;547361;37915339;2019;Teumer A
+*UACR summary available via TwoSampleMR[PMID:29846171] had only few associations. GWAS summary was downloaded manually from GWAS catalog [PMID: 27899670] ;;;;;
+http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST008001-GCST009000/GCST008794/;;;;;
