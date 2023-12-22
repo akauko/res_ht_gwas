@@ -15,5 +15,4 @@ Alcoholic drinks per week;ieu-b-73;335394;11887865;2019;Liu, M
 Glycated hemoglobin levels;ebi-a-GCST90002244;146806;30649064;2021;Chen J
 C-reactive protein;ukb-d-30710_irnt;361194;13586004;2018;Neale lab
 UACR*; -;547361;37915339;2019;Teumer A
-*UACR summary available via TwoSampleMR[PMID:29846171] had only few associations. GWAS summary was downloaded manually from GWAS catalog [PMID: 27899670] ;;;;;
-http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST008001-GCST009000/GCST008794/;;;;;
+*UACR summary available via TwoSampleMR[PMID:29846171] had only few associations. GWAS summary was downloaded manually from GWAS catalog [PMID: 27899670], http://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST008001-GCST009000/GCST008794/;;;;;
