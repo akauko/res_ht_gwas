@@ -66,6 +66,7 @@ ht_prs_preg
       ├── ATC-codes_r8_eng_all.csv              # ATC codes present in R8, also problematic codes included; probably old codes
       ├── ATC-codes_final_r8.csv                # ATC codes present in R8, only codes from current Fimea classification included
       ├── ATC-codes_r12.csv                     # ATC codes present in R12, only codes from current Fimea classification included
+      ├── GWAS_table_MR.csv                     # List of GWAS summaries used at TwoSampleMR
       ├── <endpoint>_r12.csv                    # OR table for susie hits, calculated from SUSIE summaries and HYPTENS regenie results
       ├── regenie_r12                                                
           ├── <endpoint>_pval_manhattan.png     # Output of regenie pipeline, manhattan plot
