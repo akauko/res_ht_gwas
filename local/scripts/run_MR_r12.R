@@ -25,12 +25,12 @@ exposure_ids <- names(exposures)
 ao %>% filter(id %in% exposure_ids) %>% as.data.table
 
 #Rename outcome columns to correspond defaults and add phenotype... would be faster with bash
-outcome_file_name <- "data/regenie_r12//RES_HT_rs_renamed.gz"
+outcome_file_name <- "data/regenie_r12/RES_HT_rs_renamed.gz"
 if(!file.exists(outcome_file_name)){
-  my_gwas <- fread("data/regenie_r12//RES_HT_rsn.gz") %>%
+  my_gwas <- fread("data/regenie_r12/RES_HT_rsn.gz") %>%
     rename(SNP=rsid, se=sebeta, eaf=af_alt, effect_allele=alt, other_allele=ref) %>%
     mutate(Phenotype = "RES_HT")
-  fwrite(my_gwas, "data/regenie_r12//RES_HT_rs_renamed.gz", sep="\t")
+  fwrite(my_gwas, "data/regenie_r12/RES_HT_rs_renamed.gz", sep="\t")
 }
 
 #Initialize list with empty values
@@ -48,7 +48,7 @@ for(id in exposure_ids){
   exposure_dat <- extract_instruments(id)
   
   # Get effects of instruments on outcome
-  outcome_dat <- read_outcome_data("data/regenie_r12//RES_HT_rs_renamed.gz", sep="\t", snps = exposure_dat$SNP)
+  outcome_dat <- read_outcome_data("data/regenie_r12/RES_HT_rs_renamed.gz", sep="\t", snps = exposure_dat$SNP)
   
   # Harmonise the exposure and outcome data
   dat <- harmonise_data(exposure_dat, outcome_dat)
@@ -71,7 +71,7 @@ if(!file.exists(file_name)){
   fwrite(gwas_top, file_name, sep="\t")
 }
 uacr <-  read_exposure_data(file_name, sep="\t", clump=T, id_col="uacr") %>% mutate(id.exposure="uacr")
-outcome_dat <- read_outcome_data("data/regenie_r12//RES_HT_rs_renamed.gz", sep="\t", snps = uacr$SNP)
+outcome_dat <- read_outcome_data("data/regenie_r12/RES_HT_rs_renamed.gz", sep="\t", snps = uacr$SNP)
 dat <- harmonise_data(uacr, outcome_dat)
 res[["uacr"]]  <-  mr(dat)
 
@@ -125,12 +125,12 @@ ggsave("figs/resht_mr_r12.pdf", width=7, height=2.8)
 # Hypertension as outcome
 
 #Rename outcome columns to correspond defaults and add phenotype... would be faster with bash
-outcome_file_name2 <- "data/regenie_r12//HYPTENS_rs_renamed.gz"
+outcome_file_name2 <- "data/regenie_r12/HYPTENS_rs_renamed.gz"
 if(!file.exists(outcome_file_name2)){
-  my_gwas <- fread("data/regenie_r12//HYPTENS_rsn.gz") %>%
+  my_gwas <- fread("data/regenie_r12/HYPTENS_rsn.gz") %>%
     rename(SNP=rsid, se=sebeta, eaf=af_alt, effect_allele=alt, other_allele=ref) %>%
     mutate(Phenotype = "RES_HT")
-  fwrite(my_gwas, "data/regenie_r12//HYPTENS_rs_renamed.gz", sep="\t")
+  fwrite(my_gwas, "data/regenie_r12/HYPTENS_rs_renamed.gz", sep="\t")
 }
 
 #Initialize list with empty values
@@ -148,7 +148,7 @@ for(id in exposure_ids){
   
   # Get effects of instruments on outcome
   #outcome_dat <- extract_outcome_data(outcomes = "finn-b-I9_HYPTENS", snps=exposure_dat$SNP)
-  outcome_dat <- read_outcome_data("data/regenie_r12//HYPTENS_rs_renamed.gz", sep="\t", snps = exposure_dat$SNP)
+  outcome_dat <- read_outcome_data("data/regenie_r12/HYPTENS_rs_renamed.gz", sep="\t", snps = exposure_dat$SNP)
   
   # Harmonise the exposure and outcome data
   dat <- harmonise_data(exposure_dat, outcome_dat)
@@ -159,7 +159,7 @@ for(id in exposure_ids){
 }
 #UACR
 uacr <-  read_exposure_data(file_name, sep="\t", clump=T, id_col="uacr") %>% mutate(id.exposure="uacr")
-outcome_dat <- read_outcome_data("data/regenie_r12//HYPTENS_rs_renamed.gz", sep="\t", snps = exposure_dat$SNP)
+outcome_dat <- read_outcome_data("data/regenie_r12/HYPTENS_rs_renamed.gz", sep="\t", snps = exposure_dat$SNP)
 #outcome_dat <- extract_outcome_data(outcomes = "finn-b-I9_HYPTENS", snps=uacr$SNP)
 dat <- harmonise_data(uacr, outcome_dat)
 res.ht[["uacr"]]  <-  mr(dat)
