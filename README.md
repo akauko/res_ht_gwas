@@ -23,6 +23,7 @@ We conducted a genome-wide association analysis apparent treatment resistant hyp
 * VEGAS2: https://vegas2.qimrberghofer.edu.au/
 * TWAS/FUSION: http://gusevlab.org/projects/fusion/
 * TwoSampleMR: https://mrcieu.github.io/TwoSampleMR/index.html
+* LocusZoom: https://locuszoom.org/
 
 **FinnGen pipelines**
 * Regenie: https://github.com/FINNGEN/regenie-pipelines
