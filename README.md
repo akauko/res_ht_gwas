@@ -127,5 +127,7 @@ ht_prs_preg
           ├── resht_risk_r12.pdf    
           ├── manhattan_resht_r12.jpg         # Manhattan with manually added SNP names
           ├── manhattan_resht_r12.afdesign
+          ├── locuszoom                       # Directory: Locus zoom images for 21 best hit, also screen captures for overall manhattan
+                                              # Created by LocusZoom GUI at UKBB RAP for FinnGen summary statistics (RES_HT_rsn.tsv.gz)
 
 ```
