@@ -235,10 +235,10 @@ covs_in <- fread(str_glue("{data_path}/gwas_covs_r12.txt.gz")) %>%
 
 #After definitions changed, whe do not use anymore original HT_RES or HT_RES_CL, but new variables which are created at this step. We omit age and year variables for them. Age is needed for outcomes, not for exposures.  
 
-df <- phenomin %>%
-  right_join(covs_in, by = "FINNGENID") %>%   #This represent official genotyped dataset
+df_all <- phenomin %>%
+  left_join(covs_in, by = "FINNGENID") %>%   #This represent official genotyped dataset
   left_join(htres, by = "FINNGENID") %>%
-  left_join(phenotypes, by = "FINNGENID") %>%
+  left_join(select(phenotypes, -BL_AGE, -BL_YEAR, -SEX), by = "FINNGENID") %>%
   
   mutate(
          female = SEX_IMPUTED,
@@ -300,6 +300,8 @@ df <- phenomin %>%
   mutate_at(c( "DIABETES", "OBESITY", "HYPCHOL_WIDE"), as.integer) %>%
   mutate_at(c( "DIABETES", "OBESITY", "HYPCHOL_WIDE"), ~if_else(is.na(.), 0L, .))
 
+#Remove individuals with no SEX_IMPUTED - they don't have genetic covariates
+df <- df_all %>% filter(!is.na(female))
 
 ```
 
@@ -351,23 +353,70 @@ par(mfrow=c(1,1))
 
 **Number of individuals**
 
-```{r ns}
+
+
+```{r ns1}
 #Note: Followup for drug pruchase register starts from year 1994
 
 #Number of individuals:
 c("Number of all R12 individuals:", dim(phenomin)[1])
 c("Number of individuals at 'endpoint file':", dim(phenotypes)[1])
-c("Number of individuals, genotyped:", dim(covs_in)[1])  #These are gwas covariates
-
-tmp <- df %>% 
-  filter(!is.na(female)) %>% 
-  filter(HYPTENS == 1, NRMED_MAX > 0) 
-
-c("Number of all hypertensive individuals with medication:", dim(tmp)[1])
-
 ```
 
+
+<details><summary>Summary, all data</summary><br>
+```{r}
+df_all %>% mutate_if(is.character, as.factor) %>% mutate_at(c("FINNGENID"), as.character) %>% summary()
+```
+</details><br>
+
+
+```{r}
+c("Number of individuals, with genetic covariates:", dim(covs_in)[1]) 
+```
+
+
+```{r ns2}
+tmp <- df_all %>% 
+  filter(HYPTENS == 1) 
+c("Number of all hypertensive individuals:", dim(tmp)[1])
+```
 <br>
+
+<details><summary>Summary, All hypertensive individuals</summary><br>
+```{r}
+tmp%>% mutate_if(is.character, as.factor) %>% mutate_at(c("FINNGENID"), as.character) %>% summary()
+```
+</details><br>
+
+```{r ns3}
+tmp <- df %>% 
+  filter(HYPTENS == 1) 
+c("Number of all hypertensive individuals with genetic covariates:", dim(tmp)[1])
+```
+<br>
+
+<details><summary>Summary, hypertensive with genetic covariates</summary><br>
+```{r}
+tmp %>% mutate_if(is.character, as.factor) %>% mutate_at(c("FINNGENID"), as.character) %>% summary()
+```
+</details><br>
+
+
+```{r ns4}
+#We don't have corresponding set in UKBB replication
+tmp <- df %>% 
+  filter(HYPTENS == 1, NRMED_MAX > 0) 
+c("Number of all hypertensive individuals with medication and with genetic covariates:", dim(tmp)[1])
+```
+<br>
+
+<details><summary>Summary, hypertensive with genetic covariates and with one medication</summary><br>
+```{r}
+tmp %>% mutate_if(is.character, as.factor) %>% mutate_at(c("FINNGENID"), as.character) %>% summary()
+```
+</details><br>
+
 
 **Count variables**
 
@@ -443,15 +492,36 @@ df %>%
 
 ```
 
-
-
-### Number of medicine classes
+### Resistant hypertension
 
 ```{r }
 
 #These variables were used in cox models
 names_ep <- list("CVD_HARD", "CHD","HEARTFAIL", "STR_EXH", "INTRACRA",  "RENFAIL")
 covs <- c("female", "DIABETES", "OBESITY", "HYPCHOL_WIDE") 
+
+#Number of resistant hypertension
+df %>%
+  create_n_table("RES3_HT0", covs, names_ep) %>% 
+  my.kable()%>%
+  kable_styling(font_size = font_size)
+
+```
+
+Age
+
+```{r}
+df %>% 
+  group_by(RES3_HT0) %>%
+  summarise(mean_end_age=round(mean(AGE_AT_DEATH_OR_END_OF_FOLLOWUP),2), sd_end_age=round(sd(AGE_AT_DEATH_OR_END_OF_FOLLOWUP),2)) %>%
+  my.kable()%>%
+  kable_styling(font_size = font_size)
+```
+
+
+### Number of medicine classes
+
+```{r }
 
 #Number of medicine classes
 df %>%
@@ -461,17 +531,17 @@ df %>%
 
 ```
 
-### Resistant hypertension
 
-```{r }
+Age
 
-#Number of resistant hypertension
-df %>%
-  create_n_table("RES3_HT0", covs, names_ep) %>% 
+```{r}
+df %>% 
+  group_by(NRCL_HT) %>%
+  summarise(mean_end_age=round(mean(AGE_AT_DEATH_OR_END_OF_FOLLOWUP),2), sd_end_age=round(sd(AGE_AT_DEATH_OR_END_OF_FOLLOWUP),2)) %>%
   my.kable()%>%
   kable_styling(font_size = font_size)
-
 ```
+
 
 ## {-}
 
