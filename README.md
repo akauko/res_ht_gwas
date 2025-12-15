@@ -105,6 +105,7 @@ ht_prs_preg
   ├── local
       ├── scripts                        # Miscellanous scripts run locally 
           ├── run_MR_r12.R                  # Run mendelian randomization for RES_HT and HYPTENS
+          ├── run_MR_r12_redo.R             # Run mendelian randomization, redone
           ├── risk_traits_plot.R            # Create risk traits plot for RES_HT replicated hits
           ├── check_signif_snip.R           # Check P valus and betas at UKBB data for SUSIE hits    
           ├── filter_ukbb_by_FinnGen_P.R    # Prefiltering step for check_signif_snip.R
@@ -116,12 +117,18 @@ ht_prs_preg
           ├── atc_all_matches_c0.csv         # C0* codes from https://github.com/PhilAppleby/ukbb-srmed/blob/master/data/atc_all_matches.csv
           ├── ukbb20003_n.csv                # Counts for drug codes https://biobank.ndph.ox.ac.uk/ukb/field.cgi?id=20003
           ├── ATC-codes_ukbb.csv             # Semimanually created based on above lists
+          ├── MR_reports_25                  # Directory: Mendelian randomization QC reports
+          ├── mr_gwas_info                   # Direcotory: Information about GWAS summary statistics used in MR
           ├── replic
               ├── replic_<variabe>_all.csv       # Replication summary
               ├── replic_ukb_combined.csv        # Manually  created: Replicated variants from variables ukbvar and fgvar
       ├── figs
           ├── resht_mr_r12.jpg                # Mendelian randomization plot, RES_HT
           ├── resht_mr_r12.pdf
+          ├── resht_mr_r12_redo25.jpg         # Mendelian randomization plot, RES_HT, redone
+          ├── resht_mr_r12_redo25.pdf
+          ├── resht_mr_r12_redo25_sameorder.jpg          
+          ├── resht_mr_r12_redo25_sameorder.pdf
           ├── hyptens_mr_r12.jpg              # Mendelian randomization plot, HYPTENS
           ├── hyptens_mr_r12.pdf
           ├── resht_risk_r12.jpg              # Risk plot, RES_HT
