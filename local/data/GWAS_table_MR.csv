@@ -1,0 +1,30 @@
+Risk trait;ID;sample_size;snps_all;nsnp_sign;year;First author;PMID;url
+Triglycerides;ieu-b-111;441016;12321875;282;2020;Richardson;32203549;https://gwas.mrcieu.ac.uk/datasets/ieu-b-111/
+Body mass index;ukb-b-2303;454884;9851867;417;2018;Elsworth;;https://gwas.mrcieu.ac.uk/datasets/ukb-b-2303/
+Fasting glucose;ebi-a-GCST90002232;200622;31008728;65;2021;Chen;34059833;https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST90002232/
+Urate;ukb-d-30880_irnt;361194;13585994;228;2018;Neale lab;;https://gwas.mrcieu.ac.uk/datasets/ukb-d-30880_irnt/
+Waist circumference;ukb-b-9405;462166;9851867;348;2018;Elsworth;;https://gwas.mrcieu.ac.uk/datasets/ukb-b-9405/
+eGFR;ieu-b-4832;76511;7892788;35;2022;Howe;;https://gwas.mrcieu.ac.uk/datasets/ieu-b-4832/
+Neuroticism score;ukb-b-4630;374323;9851867;108;2018;Elsworth;;https://gwas.mrcieu.ac.uk/datasets/ukb-b-4630/
+HDL cholesterol;ieu-b-109;403943;12321875;322;2020;Richardson;32203549;https://gwas.mrcieu.ac.uk/datasets/ieu-b-109/
+Height;ukb-b-10787;461950;9851867;724;2018;Elsworth;;https://gwas.mrcieu.ac.uk/datasets/ukb-b-10787
+Total cholesterol;met-d-Total_C;115078;12321875;58;2020;Borges;;https://gwas.mrcieu.ac.uk/datasets/met-d-Total_C
+Current tobacco smoking;ukb-b-223;462434;9851867;33;2018;Elsworth;;https://gwas.mrcieu.ac.uk/datasets/ukb-b-223
+LDL cholesterol;ieu-b-110;440546;12321875;162;2020;Richardson;32203549;https://gwas.mrcieu.ac.uk/datasets/ieu-b-110
+Alcoholic drinks per week;ieu-b-73;335394;11887865;33;2019;Liu;30643251;https://gwas.mrcieu.ac.uk/datasets/ieu-b-73
+Glycated hemoglobin levels;ebi-a-GCST90002244;146806;30649064;70;2021;Chen;34059833;https://gwas.mrcieu.ac.uk/datasets/ebi-a-GCST90002244
+C-reactive protein;ukb-d-30710_irnt;361194;13586004;187;2018;Neale lab;;https://gwas.mrcieu.ac.uk/datasets/ukb-d-30710_irnt
+UACR*;GCST008794;547361;37915339;54;2019;Teumer;31511532;https://www.ebi.ac.uk/gwas/studies/GCST008794
+*GWAS summary was downloaded manually from GWAS catalog [PMID: 27899670], because UACR summary statistics available via TwoSampleMR[PMID:29846171] had only few associations. ;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;;;
+;;;;;;; ;
